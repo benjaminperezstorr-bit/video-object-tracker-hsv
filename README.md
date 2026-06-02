@@ -1,4 +1,6 @@
 
+> First functional version of a real-time object tracker using HSV color segmentation.
+
 # HSV Video Object Tracker
 
 This project is an interactive video object tracker built with Python and OpenCV.
