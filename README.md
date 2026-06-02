@@ -30,11 +30,6 @@ Select the largest contour as the tracked object.
 Draw a bounding box, center point and tracking information.
 Installation
 
-Clone the repository:
-
-git clone https://github.com/benjaminperezstorr-bit/video-object-tracker-hsv.git
-cd video-object-tracker-hsv
-
 Create a virtual environment:
 
 python -m venv venv
