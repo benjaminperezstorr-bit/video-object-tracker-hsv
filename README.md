@@ -1,5 +1,4 @@
-# video-object-tracker-hsv
-Interactive video object tracking using HSV color segmentation with Python and OpenCV.
+
 # HSV Video Object Tracker
 
 This project is an interactive video object tracker built with Python and OpenCV.
