@@ -29,6 +29,9 @@ Detect contours in the mask.
 Select the largest contour as the tracked object.
 Draw a bounding box, center point and tracking information.
 Installation
+## Why HSV?
+
+HSV is more suitable than RGB for color-based tracking because it separates chromatic information from brightness. This makes it easier to define a color range around the selected object, even when lighting conditions change slightly.
 
 Create a virtual environment:
 
