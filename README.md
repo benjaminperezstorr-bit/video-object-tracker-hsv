@@ -5,30 +5,29 @@ This project is an interactive video object tracker built with Python and OpenCV
 
 The tracker allows the user to click on an object in the webcam stream. The selected pixel color is converted to the HSV color space, and the object is then tracked in real time using color segmentation.
 
-Features: 
+## Features
 
-Real-time webcam video processing
-Interactive object selection with mouse click
-RGB/BGR to HSV color conversion
-HSV thresholding with tolerance values
-Special handling for red hue wrapping around 0/180
-Morphological operations to reduce noise
-Contour detection
-Bounding box and center point visualization
-Reset and quit keyboard controls
-Method
+- Real-time webcam video processing
+- Interactive object selection with mouse click
+- BGR to HSV color conversion
+- HSV thresholding with tolerance values
+- Special handling for red hue wrapping around 0/180
+- Morphological operations to reduce noise
+- Contour detection
+- Bounding box and center point visualization
+- Reset and quit keyboard controls
 
-The tracking pipeline is based on the following steps:
+## The tracking pipeline is based on the following steps:
 
-Capture frames from the webcam using OpenCV.
-Let the user click on the target object.
-Convert the selected pixel from BGR to HSV.
-Build a binary mask around the selected HSV value.
-Apply morphological operations to clean the mask.
-Detect contours in the mask.
-Select the largest contour as the tracked object.
-Draw a bounding box, center point and tracking information.
-Installation
+- Capture frames from the webcam using OpenCV.
+- Let the user click on the target object.
+- Convert the selected pixel from BGR to HSV.
+- Build a binary mask around the selected HSV value.
+- Apply morphological operations to clean the mask.
+- Detect contours in the mask.
+- Select the largest contour as the tracked object.
+- Draw a bounding box, center point and tracking information.
+- Installation
 ## Why HSV?
 
 HSV is more suitable than RGB for color-based tracking because it separates chromatic information from brightness. This makes it easier to define a color range around the selected object, even when lighting conditions change slightly.
