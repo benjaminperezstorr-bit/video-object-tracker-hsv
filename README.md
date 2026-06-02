@@ -33,6 +33,8 @@ Installation
 
 HSV is more suitable than RGB for color-based tracking because it separates chromatic information from brightness. This makes it easier to define a color range around the selected object, even when lighting conditions change slightly.
 
+
+
 Create a virtual environment:
 
 python -m venv venv
@@ -106,6 +108,19 @@ Project Status
 First functional version completed.
 
 This version demonstrates a basic but complete computer vision pipeline for real-time object tracking using HSV color segmentation.
+
+## Roadmap
+
+- [x] Real-time webcam capture
+- [x] Mouse-based target selection
+- [x] HSV color segmentation
+- [x] Morphological mask cleaning
+- [x] Bounding box visualization
+- [ ] Save tracked video output
+- [ ] Add trajectory visualization
+- [ ] Add Kalman filter prediction
+- [ ] Add multi-object tracking
+- [ ] Add deep learning detector
 
 Author
 
