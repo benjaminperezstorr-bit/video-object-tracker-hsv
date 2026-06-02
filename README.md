@@ -32,7 +32,7 @@ Installation
 
 Clone the repository:
 
-git clone https://github.com/your-username/video-object-tracker-hsv.git
+git clone https://github.com/benjaminperezstorr-bit/video-object-tracker-hsv.git
 cd video-object-tracker-hsv
 
 Create a virtual environment:
