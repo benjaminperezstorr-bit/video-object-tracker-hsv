@@ -32,9 +32,7 @@ def on_mouse_click(event, x, y, flags, param):
         w = frame_raw.shape[1]
         x_real = w-x
         pixel_gbr = frame_raw[y, x_real]
-        pixel_hsv = cv2.cvtColor(
-            np.uint8([[pixel_gbr]]), cv2.COLOR_BGR2HSV
-        )[0][0]
+        pixel_hsv = cv2.cvtColor(np.uint8([[pixel_gbr]]), cv2.COLOR_BGR2HSV)[0][0]
         target_hsv = pixel_hsv
         tracking = True
         h,s,v = int(target_hsv[0]),int(target_hsv[1]), int(target_hsv[2])
@@ -66,9 +64,7 @@ def build_mask(hsv_frame,target):
 
 
 def find_object(mask):
-    contours, _ = cv2.findContours(
-        mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-    )
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     if not contours:
         return None
@@ -92,8 +88,7 @@ def draw_overlay(frame, result, target_hsv):
     cx, cy, w, h, area = result
 
     # Bounding box
-    cv2.rectangle(frame, (cx - w//2, cy - h//2),
-                  (cx + w//2, cy + h//2), (0, 255, 120), 2)
+    cv2.rectangle(frame, (cx - w//2, cy - h//2),(cx + w//2, cy + h//2), (0, 255, 120), 2)
 
     # Cercle central
     cv2.circle(frame, (cx, cy), 6, (0, 255, 120), -1)
@@ -104,14 +99,11 @@ def draw_overlay(frame, result, target_hsv):
     cv2.line(frame, (cx, cy - arm), (cx, cy + arm), (0, 255, 120), 1)
 
     # Infos texte
-    cv2.putText(frame, f"({cx}, {cy})",
-                (cx + 12, cy - 12),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 120), 1)
+    cv2.putText(frame, f"({cx}, {cy})",(cx + 12, cy - 12),cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 120), 1)
 
     # Barre d'état en haut à gauche
     hue = int(target_hsv[0])
-    cv2.putText(frame, f"TRACKING  H={hue}  px={area}",
-                (10, 24), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 255, 120), 1)
+    cv2.putText(frame, f"TRACKING  H={hue}  px={area}",(10, 24), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 255, 120), 1)
 
 
 def main():
@@ -122,7 +114,7 @@ def main():
         print(f"[ERREUR] Impossible d'ouvrir la source vidéo : {SOURCE}")
         return
 
-    print("=== TRACKER DÉMARRÉ ===")
+    print(" TRACKER DÉMARRÉ ")
     print("  Cliquez sur l'objet à suivre")
     print("  'r' → réinitialiser  |  'q' → quitter")
 
@@ -138,12 +130,12 @@ def main():
 
         # Miroir horizontal (plus naturel avec une webcam)
         frame_mirror = cv2.flip(frame, 1)
-        frame_raw    = frame           # non-miroir pour lire le bon pixel
+        frame_raw  = frame           # non-miroir pour lire le bon pixel
 
         display = frame_mirror.copy()
 
         if tracking and target_hsv is not None:
-            hsv   = cv2.cvtColor(frame_mirror, cv2.COLOR_BGR2HSV)
+            hsv  = cv2.cvtColor(frame_mirror, cv2.COLOR_BGR2HSV)
             mask  = build_mask(hsv, target_hsv)
             result = find_object(mask)
 
