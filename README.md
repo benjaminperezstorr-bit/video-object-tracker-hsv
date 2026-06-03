@@ -7,6 +7,13 @@ This project is an interactive video object tracker built with Python and OpenCV
 
 The tracker allows the user to click on an object in the webcam stream. The selected pixel color is converted to the HSV color space, and the object is then tracked in real time using color segmentation.
 
+## Versions
+
+| Version | File | Description |
+|---|---|---|
+| V1 | `src/v1_hsv_tracker.py` | Basic real-time object tracking using HSV color segmentation |
+| V2 | `src/v2_hsv_kalman_trajectory.py` | Improved HSV tracker with trajectory visualization and Kalman filter prediction |
+
 ## Features
 
 - Real-time webcam video processing
@@ -56,8 +63,11 @@ pip install -r requirements.txt
 Usage
 
 Run the tracker:
+first version:
+python src/v1_hsv_tracker.py
 
-python src/tracker_hsv.py
+improved version:
+python src/v2_hsv_kalman_trajectory.py
 
 Controls:
 
@@ -122,6 +132,26 @@ This version demonstrates a basic but complete computer vision pipeline for real
 - [ ] Add Kalman filter prediction
 - [ ] Add multi-object tracking
 - [ ] Add deep learning detector
+
+
+## V2 Improvements
+
+The second version improves the initial HSV tracker with:
+
+- Trajectory visualization using a fixed-length history of positions
+- Kalman filtering for smoother tracking
+- Position prediction when the object is temporarily lost
+- More robust color selection by averaging HSV values around the clicked area
+- Visual distinction between real tracking and predicted position
+
+## Kalman Filter
+
+In V2, a Kalman filter is used to estimate the position of the tracked object.
+
+The state is defined as:
+```
+[x, y, vx, vy]
+```
 
 Author
 
