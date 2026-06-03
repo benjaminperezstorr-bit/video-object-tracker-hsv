@@ -41,7 +41,7 @@ The tracker allows the user to click on an object in the webcam stream. The sele
 
 HSV is more suitable than RGB for color-based tracking because it separates chromatic information from brightness. This makes it easier to define a color range around the selected object, even when lighting conditions change slightly.
 
-
+##usage
 
 Create a virtual environment:
 
