@@ -5,29 +5,28 @@ from collections import deque
 
 #  TRACKER V2 — HSV + Trajectoire (Kalman Filter)
 #  Cliquez sur l'objet à tracker
-#  'r' → réinitialiser  |  'q' → quitter
+#  'r' → réinitialiser 'q' → quitter
 
-SOURCE = 0
-tolerance_h = 15
+SOURCE =0
+tolerance_h =15
 tolerance_s = 45
-tolerance_v = 45
+tolerance_v =45
 
 TRAIL_LENGTH = 40   # nombre de positions conservées pour dessiner la trainée
 
 # ── Variables globales 
 target_hsv  = None
-tracking    = False
+tracking = False
 frame_raw   = None
 
 # File des dernières positions détectées : [(cx, cy), ...]
-trail = deque(maxlen=TRAIL_LENGTH)
+trail =deque(maxlen=TRAIL_LENGTH)
 
 # Filtre de Kalman (initialisé au premier clic)
 kalman = None
 
 
 #  Kalman 
-
 def create_kalman():
     """
     Crée un filtre de Kalman 2D qui modélise :
@@ -87,15 +86,15 @@ def kalman_predict_only():
 def on_mouse_click(event, x, y, flags, param):
     global target_hsv, tracking, kalman, trail
 
-    if event == cv2.EVENT_LBUTTONDOWN:
+    if event ==cv2.EVENT_LBUTTONDOWN:
         w = frame_raw.shape[1]
         h_img = frame_raw.shape[0]
         x_real = w - x
 
         region = 20
-        y1 = max(0, y - region)
+        y1 =max(0, y - region)
         y2 = min(h_img, y + region)
-        x1 = max(0, x_real - region)
+        x1 =max(0, x_real - region)
         x2 = min(w, x_real + region)
 
         region_bgr = frame_raw[y1:y2, x1:x2]
@@ -117,12 +116,12 @@ def on_mouse_click(event, x, y, flags, param):
 #  Masque HSV 
 
 def build_mask(hsv_frame, target):
-    h, s, v = int(target[0].item()), int(target[1].item()), int(target[2].item())
+    h,s,v = int(target[0].item()), int(target[1].item()), int(target[2].item())
 
     lower = np.array([max(0, h - tolerance_h),max(0, s - tolerance_s),max(0, v - tolerance_v)])
-    upper = np.array([min(180, h + tolerance_h),min(255, s + tolerance_s),min(255, v + tolerance_v)])
+    upper =np.array([min(180, h + tolerance_h),min(255, s + tolerance_s),min(255, v + tolerance_v)])
 
-    mask = cv2.inRange(hsv_frame, lower, upper)
+    mask =cv2.inRange(hsv_frame, lower, upper)
 
     if h < tolerance_h:
         l2 = np.array([180 - (tolerance_h - h), lower[1], lower[2]])
@@ -147,14 +146,14 @@ def find_object(mask):
     if not contours:
         return None
 
-    best = max(contours, key=cv2.contourArea)
+    best = max(contours,key=cv2.contourArea)
     area = cv2.contourArea(best)
     if area < 500:
         return None
 
     x, y, w, h = cv2.boundingRect(best)
-    cx = x + w // 2
-    cy = y + h // 2
+    cx =x + w//2
+    cy =y + h//2
     return cx, cy, w, h, int(area)
 
 
@@ -175,8 +174,8 @@ def draw_trail(frame):
 
 
 def draw_overlay(frame, cx, cy, w, h, area, predicted=False):
-    color = (0, 180, 255) if predicted else (0, 255, 120)
-    label = "PREDICTION" if predicted else "TRACKING"
+    color =(0, 180, 255) if predicted else (0, 255, 120)
+    label ="PREDICTION" if predicted else "TRACKING"
 
     cv2.rectangle(frame, (cx - w//2, cy - h//2),
                   (cx + w//2, cy + h//2), color, 2)
@@ -218,7 +217,7 @@ def main():
 
         frame_mirror = cv2.flip(frame, 1)
         frame_raw  = frame
-        display  = frame_mirror.copy()
+        display = frame_mirror.copy()
 
         if tracking and target_hsv is not None:
             hsv  = cv2.cvtColor(frame_mirror, cv2.COLOR_BGR2HSV)
@@ -248,12 +247,12 @@ def main():
 
         cv2.imshow(win, display)
 
-        key = cv2.waitKey(1) & 0xFF
+        key =cv2.waitKey(1) & 0xFF
         if key == ord('q'):
             break
         if key == ord('r'):
             target_hsv = None
-            tracking   = False
+            tracking = False
             trail.clear()
             print("[RESET]")
 
