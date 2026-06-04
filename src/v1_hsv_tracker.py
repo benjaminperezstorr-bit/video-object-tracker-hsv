@@ -110,9 +110,9 @@ def main():
         print(f"[ERREUR] Impossible d'ouvrir la source vidéo : {SOURCE}")
         return
 
-    print("=== TRACKER DÉMARRÉ ===")
+    print(" TRACKER DÉMARRÉ ")
     print("  Cliquez sur l'objet à suivre")
-    print("  'r' -> réinitialiser  |  'q' -> quitter")
+    print("  'r' -> réinitialiser   'q' -> quitter")
 
     win = "Tracker — cliquez pour sélectionner"
     cv2.namedWindow(win)
@@ -126,7 +126,7 @@ def main():
 
         # Miroir horizontal (plus naturel avec une webcam)
         frame_mirror = cv2.flip(frame, 1)
-        frame_raw  = frame           # non-miroir pour lire le bon pixel
+        frame_raw = frame           # non-miroir pour lire le bon pixel
 
         display = frame_mirror.copy()
 
